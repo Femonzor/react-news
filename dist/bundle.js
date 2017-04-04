@@ -32280,7 +32280,12 @@
 	        value: function componentDidMount() {
 	            var dispatch = this.props.dispatch;
 	
-	            dispatch(_SubjectsActions2.default.fetchSubjects());
+	            if (this.props.curIdx === -1) {
+	                sessionStorage.removeItem("SCROLL_POSITIONS");
+	                sessionStorage.removeItem("NAV_SCROLL_LEFT");
+	                sessionStorage.removeItem("CURRENT_SUBJECT");
+	                dispatch(_SubjectsActions2.default.fetchSubjects());
+	            }
 	        }
 	    }, {
 	        key: "render",
@@ -32607,11 +32612,6 @@
 	    }
 	
 	    _createClass(SiteMain, [{
-	        key: "componentWillReceiveProps",
-	        value: function componentWillReceiveProps(nextProps) {
-	            var a = 1;
-	        }
-	    }, {
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -32677,7 +32677,10 @@
 	var step = function step(navList, unit) {
 	    process += 1;
 	    navList.scrollLeft += unit;
-	    if (process < 15) timer = requestAnimationFrame(step.bind(null, navList, unit));else cancelAnimationFrame(timer);
+	    if (process < 15) timer = requestAnimationFrame(step.bind(null, navList, unit));else {
+	        sessionStorage.setItem("NAV_SCROLL_LEFT", navList.scrollLeft);
+	        cancelAnimationFrame(timer);
+	    }
 	};
 	
 	var NavMore = function (_Component) {
@@ -32968,6 +32971,14 @@
 	            }
 	        }
 	    }, {
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var curIdx = this.props.curIdx;
+	
+	            var scrollLeft = sessionStorage.getItem("NAV_SCROLL_LEFT");
+	            if (curIdx !== -1 && scrollLeft) this.refs.navs.navList.scrollLeft = +scrollLeft;
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
 	            var showMore = this.props.showMore;
@@ -33210,8 +33221,15 @@
 	
 	            var iscroll = this.refs.scroll.iscroll;
 	            var curIdx = iscroll.currentPage.pageX;
-	            dispatch(_SubjectsActions2.default.switchSubjectByIdx(curIdx));
-	            _IScrolls2.default.setCurIdx(curIdx);
+	            var subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
+	            if (curIdx !== this.props.curIdx) {
+	                subject.curIdx = curIdx;
+	                subject.name = this.props.subjects[curIdx].name;
+	                subject.id = this.props.subjects[curIdx].id;
+	                sessionStorage.setItem("CURRENT_SUBJECT", JSON.stringify(subject));
+	                dispatch(_SubjectsActions2.default.switchSubjectByIdx(curIdx));
+	                _IScrolls2.default.setCurIdx(curIdx);
+	            }
 	        }
 	    }, {
 	        key: "renderPages",
@@ -33231,9 +33249,26 @@
 	            var curIdx = this.props.curIdx;
 	
 	            var iscroll = this.refs.scroll.iscroll;
+	            var subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
 	            if (iscroll.currentPage.pageX !== curIdx) {
+	                subject.curIdx = curIdx;
+	                subject.name = this.props.subjects[curIdx].name;
+	                subject.id = this.props.subjects[curIdx].id;
+	                sessionStorage.setItem("CURRENT_SUBJECT", JSON.stringify(subject));
 	                iscroll.goToPage(curIdx, 0, 0);
 	                _IScrolls2.default.setCurIdx(curIdx);
+	            }
+	        }
+	    }, {
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var curIdx = this.props.curIdx;
+	
+	            var iscroll = this.refs.scroll.iscroll;
+	            var subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
+	            if (curIdx !== -1 && subject.curIdx) {
+	                iscroll.goToPage(subject.curIdx, 0, 0);
+	                _IScrolls2.default.setCurIdx(subject.curIdx);
 	            }
 	        }
 	    }, {
@@ -33505,10 +33540,10 @@
 	var PageContent = function (_Component) {
 	    _inherits(PageContent, _Component);
 	
-	    function PageContent(props, context) {
+	    function PageContent(props) {
 	        _classCallCheck(this, PageContent);
 	
-	        var _this = _possibleConstructorReturn(this, (PageContent.__proto__ || Object.getPrototypeOf(PageContent)).call(this, props, context));
+	        var _this = _possibleConstructorReturn(this, (PageContent.__proto__ || Object.getPrototypeOf(PageContent)).call(this, props));
 	
 	        _this.switchPicCarousel = _this.switchPicCarousel.bind(_this);
 	        _this.setScrollTopOffset = _this.setScrollTopOffset.bind(_this);
@@ -33600,6 +33635,7 @@
 	        key: "scrollEndEvent",
 	        value: function scrollEndEvent() {
 	            _IScrolls2.default.scrollEndHandler();
+	            var positions = JSON.parse(sessionStorage.getItem("SCROLL_POSITIONS")) || {};
 	            var _props2 = this.props,
 	                data = _props2.data,
 	                dispatch = _props2.dispatch,
@@ -33612,6 +33648,8 @@
 	
 	            var iscroll = this.refs[this.scrlId].iscroll;
 	            var downStatus = data.downStatus;
+	            positions[this.wrapId] = iscroll.y;
+	            sessionStorage.setItem("SCROLL_POSITIONS", JSON.stringify(positions));
 	            if (downStatus === 1) {
 	                dispatch(_SubjectDataActions2.default.setRefreshStatus(id, 2));
 	                setTimeout(function () {
@@ -33756,6 +33794,9 @@
 	                setTimeout(function () {
 	                    dispatch(_SubjectDataActions2.default.fetchSubjectData(id, type, data && data.page ? data.page : 0));
 	                }, 1500);
+	            } else {
+	                this.iscrollRefresh = true;
+	                this.imgShow();
 	            }
 	        }
 	    }, {
@@ -33791,11 +33832,6 @@
 	
 	    return PageContent;
 	}(_react.Component);
-	
-	PageContent.contextTypes = {
-	    router: _react.PropTypes.object.isRequired
-	};
-	
 	
 	PageContent.defaultProps = { iscrollType: "list" };
 	
@@ -34243,8 +34279,10 @@
 	                isHistory = _props.isHistory;
 	
 	            this.iscroll = new _iscrollProbe2.default(_reactDom2.default.findDOMNode(this.refs.scrollEl), _Settings2.default.iscrollOptions[type], !!isHistory);
+	            var positions = JSON.parse(sessionStorage.getItem("SCROLL_POSITIONS")) || {};
 	            if (type === "list") {
 	                _IScrolls2.default.setPage(this.iscroll, idx);
+	                if (positions[wrapId]) this.iscroll.scrollTo(0, positions[wrapId]);
 	            } else if (type === "carousel" && wrapId) {
 	                _IScrolls2.default.setCarl(this.iscroll);
 	            } else if (type === "page") {
@@ -34626,7 +34664,7 @@
 	            useTransition: true,
 	            useTransform: true,
 	            bindToWrapper: typeof window.onmousedown === "undefined",
-	            initScrollToBounceTime: 2000
+	            initScrollToBounceTime: 200
 	        };
 	
 	        for (var i in options) {
@@ -36889,10 +36927,10 @@
 	var InfoList = function (_Component) {
 	    _inherits(InfoList, _Component);
 	
-	    function InfoList(props) {
+	    function InfoList(props, context) {
 	        _classCallCheck(this, InfoList);
 	
-	        var _this = _possibleConstructorReturn(this, (InfoList.__proto__ || Object.getPrototypeOf(InfoList)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (InfoList.__proto__ || Object.getPrototypeOf(InfoList)).call(this, props, context));
 	
 	        _this.handleItemClick = _this.handleItemClick.bind(_this);
 	        return _this;
@@ -36901,14 +36939,14 @@
 	    _createClass(InfoList, [{
 	        key: "handleItemClick",
 	        value: function handleItemClick(e) {
-	            var dispatch = this.props.dispatch;
-	
-	            var id = +e.currentTarget.dataset.infoId;
-	            var subjectName = e.currentTarget.dataset.subjectName;
-	            subjectName = subjectName || this.props.subjectName;
-	            id = id % 5;
-	            if (id === 0) id = 5;
-	            dispatch(_DetailActions2.default.showDetail(subjectName, "info-" + id));
+	            // const { dispatch } = this.props;
+	            // let id = +e.currentTarget.dataset.infoId;
+	            // let subjectName = e.currentTarget.dataset.subjectName;
+	            // subjectName = subjectName || this.props.subjectName;
+	            // id = id % 5;
+	            // if (id === 0) id = 5;
+	            // dispatch(DetailActions.showDetail(subjectName, "info-" + id));
+	            this.context.router.push("/detail");
 	        }
 	    }, {
 	        key: "renderInfoItems",
@@ -36942,6 +36980,9 @@
 	    return InfoList;
 	}(_react.Component);
 	
+	InfoList.contextTypes = {
+	    router: _react.PropTypes.object.isRequired
+	};
 	exports.default = InfoList;
 
 /***/ },

@@ -305,7 +305,7 @@
             useTransition: true,
             useTransform: true,
             bindToWrapper: typeof window.onmousedown === "undefined",
-            initScrollToBounceTime: 2000
+            initScrollToBounceTime: 200
         };
 
         for (var i in options) {

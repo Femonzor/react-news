@@ -16,7 +16,10 @@ const step = (navList, unit) => {
     process += 1;
     navList.scrollLeft += unit;
     if (process < 15) timer = requestAnimationFrame(step.bind(null, navList, unit));
-    else cancelAnimationFrame(timer);
+    else {
+        sessionStorage.setItem("NAV_SCROLL_LEFT", navList.scrollLeft);
+        cancelAnimationFrame(timer);
+    }
 }
 
 class NavMore extends Component {
@@ -177,6 +180,11 @@ class SiteNav extends Component {
                 timer = requestAnimationFrame(step.bind(null, navList, (navItem.offsetLeft - endIntervalEnd) / 15));
             }
         }
+    }
+    componentDidMount() {
+        const { curIdx } = this.props;
+        const scrollLeft = sessionStorage.getItem("NAV_SCROLL_LEFT");
+        if (curIdx !== -1 && scrollLeft) this.refs.navs.navList.scrollLeft = +scrollLeft;
     }
     render() {
         const { showMore } = this.props;

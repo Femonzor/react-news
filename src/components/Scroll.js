@@ -12,8 +12,10 @@ class Scroll extends Component {
     initIScroll() {
         const { scrollStartEvent, scrollEvent, scrollEndEvent, initStatus, type, idx, wrapId, isHistory } = this.props;
         this.iscroll = new IScroll(ReactDOM.findDOMNode(this.refs.scrollEl), Settings.iscrollOptions[type], !!isHistory);
+        const positions = JSON.parse(sessionStorage.getItem("SCROLL_POSITIONS")) || {};
         if (type === "list") {
             IScrolls.setPage(this.iscroll, idx);
+            if (positions[wrapId]) this.iscroll.scrollTo(0, positions[wrapId]);
         } else if (type === "carousel" && wrapId) {
             IScrolls.setCarl(this.iscroll);
         } else if (type === "page") {

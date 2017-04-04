@@ -23,8 +23,15 @@ class ScrollContent extends Component {
         const { dispatch } = this.props;
         const iscroll = this.refs.scroll.iscroll;
         const curIdx = iscroll.currentPage.pageX;
-        dispatch(SubjectsActions.switchSubjectByIdx(curIdx));
-        IScrolls.setCurIdx(curIdx);
+        let subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
+        if (curIdx !== this.props.curIdx) {
+            subject.curIdx = curIdx;
+            subject.name = this.props.subjects[curIdx].name;
+            subject.id = this.props.subjects[curIdx].id;
+            sessionStorage.setItem("CURRENT_SUBJECT", JSON.stringify(subject));
+            dispatch(SubjectsActions.switchSubjectByIdx(curIdx));
+            IScrolls.setCurIdx(curIdx);
+        }
     }
     renderPages() {
         const { subjects } = this.props;
@@ -38,9 +45,23 @@ class ScrollContent extends Component {
     componentDidUpdate() {
         const { curIdx } = this.props;
         const iscroll = this.refs.scroll.iscroll;
+        let subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
         if (iscroll.currentPage.pageX !== curIdx) {
+            subject.curIdx = curIdx;
+            subject.name = this.props.subjects[curIdx].name;
+            subject.id = this.props.subjects[curIdx].id;
+            sessionStorage.setItem("CURRENT_SUBJECT", JSON.stringify(subject));
             iscroll.goToPage(curIdx, 0, 0);
             IScrolls.setCurIdx(curIdx);
+        }
+    }
+    componentDidMount() {
+        const { curIdx } = this.props;
+        const iscroll = this.refs.scroll.iscroll;
+        const subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
+        if (curIdx !== -1 && subject.curIdx) {
+            iscroll.goToPage(subject.curIdx, 0, 0);
+            IScrolls.setCurIdx(subject.curIdx);
         }
     }
     render() {

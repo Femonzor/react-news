@@ -4,18 +4,22 @@ import InfoImgsItem from "./InfoImgsItem";
 import DetailActions from "../actions/DetailActions";
 
 class InfoList extends Component {
-    constructor(props) {
-        super(props);
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    };
+    constructor(props, context) {
+        super(props, context);
         this.handleItemClick = this.handleItemClick.bind(this);
     }
     handleItemClick(e) {
-        const { dispatch } = this.props;
-        let id = +e.currentTarget.dataset.infoId;
-        let subjectName = e.currentTarget.dataset.subjectName;
-        subjectName = subjectName || this.props.subjectName;
-        id = id % 5;
-        if (id === 0) id = 5;
-        dispatch(DetailActions.showDetail(subjectName, "info-" + id));
+        // const { dispatch } = this.props;
+        // let id = +e.currentTarget.dataset.infoId;
+        // let subjectName = e.currentTarget.dataset.subjectName;
+        // subjectName = subjectName || this.props.subjectName;
+        // id = id % 5;
+        // if (id === 0) id = 5;
+        // dispatch(DetailActions.showDetail(subjectName, "info-" + id));
+        this.context.router.push("/detail");
     }
     renderInfoItems() {
         const { infos } = this.props;

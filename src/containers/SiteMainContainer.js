@@ -6,7 +6,12 @@ import SiteMain from "../components/SiteMain";
 class SiteMainContainer extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(SubjectsActions.fetchSubjects());
+        if (this.props.curIdx === -1) {
+            sessionStorage.removeItem("SCROLL_POSITIONS");
+            sessionStorage.removeItem("NAV_SCROLL_LEFT");
+            sessionStorage.removeItem("CURRENT_SUBJECT");
+            dispatch(SubjectsActions.fetchSubjects());
+        }
     }
     render() {
         return <SiteMain {...this.props} />;

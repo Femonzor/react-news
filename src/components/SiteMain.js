@@ -3,9 +3,6 @@ import SiteNav from "./SiteNav";
 import ScrollContent from "./ScrollContent";
 
 class SiteMain extends Component {
-    componentWillReceiveProps(nextProps) {
-        var a = 1;
-    }
     render() {
         return (
             <div className="main">

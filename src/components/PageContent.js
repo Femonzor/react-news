@@ -36,11 +36,8 @@ const throttle = (fn, delay, mustRunDelay) => {
 };
 
 class PageContent extends Component {
-    static contextTypes = {
-        router: PropTypes.object.isRequired
-    };
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         this.switchPicCarousel = this.switchPicCarousel.bind(this);
         this.setScrollTopOffset = this.setScrollTopOffset.bind(this);
         this.scrollStartEvent = this.scrollStartEvent.bind(this);
@@ -108,11 +105,14 @@ class PageContent extends Component {
     }
     scrollEndEvent() {
         IScrolls.scrollEndHandler();
+        let positions = JSON.parse(sessionStorage.getItem("SCROLL_POSITIONS")) || {};
         const { data, dispatch, subject, idx } = this.props;
         const { id, type } = subject;
         const { page, end } = data;
         const iscroll = this.refs[this.scrlId].iscroll;
         const downStatus = data.downStatus;
+        positions[this.wrapId] = iscroll.y;
+        sessionStorage.setItem("SCROLL_POSITIONS", JSON.stringify(positions));
         if (downStatus === 1) {
             dispatch(SubjectDataActions.setRefreshStatus(id, 2));
             setTimeout(() => {
@@ -230,6 +230,9 @@ class PageContent extends Component {
             setTimeout(() => {
                 dispatch(SubjectDataActions.fetchSubjectData(id, type, data && data.page ? data.page : 0));
             }, 1500);
+        } else {
+            this.iscrollRefresh = true;
+            this.imgShow();
         }
     }
     render() {
