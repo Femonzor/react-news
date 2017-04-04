@@ -1,0 +1,21 @@
+{
+    "subjects": [
+        { "name": "首页", "type": 0, "id": 1, "loaded": true },
+        { "name": "总行快讯", "type": 1, "id": 2, "loaded": false },
+        { "name": "高层图片", "type": 2, "id": 3, "loaded": false },
+        { "name": "今日要闻", "type": 1, "id": 4, "loaded": false },
+        { "name": "通知公告", "type": 1, "id": 5, "loaded": false },
+        { "name": "高层传真", "type": 1, "id": 6, "loaded": false },
+        { "name": "分行动态", "type": 1, "id": 7, "loaded": false },
+        { "name": "省行营业部", "type": 1, "id": 8, "loaded": false },
+        { "name": "基层信息", "type": 1, "id": 9, "loaded": false },
+        { "name": "一周精选", "type": 1, "id": 10, "loaded": false },
+        { "name": "基层快照", "type": 2, "id": 11, "loaded": false },
+        { "name": "海外专递", "type": 1, "id": 12, "loaded": false },
+        { "name": "部室答疑", "type": 1, "id": 13, "loaded": false },
+        { "name": "情况反映", "type": 1, "id": 14, "loaded": false },
+        { "name": "外界看工行", "type": 1, "id": 15, "loaded": false }
+    ],
+    "selectId": 1,
+    "curIdx": 0
+}

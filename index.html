@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>网讯</title>
+        <meta charset="utf-8" />
+        <script type="text/javascript">
+            (function (doc, win) {
+                var ua = navigator.userAgent,
+                    isAndroid = /android|adr/gi.test(ua),
+                    isIPhone = /iphone/gi.test(ua) && !isAndroid,
+                    devicePixelRatio = win.devicePixelRatio,
+                    docEl = doc.documentElement, metaEl,
+                    dpr, maxWidth = 750;
+                if (isIPhone) {
+                    if (devicePixelRatio >= 3) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+                docEl.setAttribute("data-dpr", dpr);
+                metaEl = doc.createElement("meta");
+                metaEl.setAttribute("name", "viewport");
+                metaEl.setAttribute("content", "initial-scale=" + scale + ", maximum-scale=" + scale + ", minimum-scale=" + scale + ", user-scalable=no");
+                doc.querySelector("head").appendChild(metaEl);
+                win.addEventListener("resize", function () {
+                    refreshRem.call(this, false);
+                }, false);
+                refreshRem(true);
+                function refreshRem(firstTime) {
+                    var width = docEl.getBoundingClientRect().width;
+                    if (width / dpr > maxWidth) {
+                        width = maxWidth * dpr;
+                    }
+                    var rem = width / 10;
+                    if (firstTime) {
+                        docEl.style.fontSize = rem + 'px';
+                    }
+                }
+                doc.documentElement.addEventListener("touchstart", function (e) {
+                    if (e.touches.length > 1) e.preventDefault();
+                }, false);
+            })(document, window);
+        </script>
+    <link href="/react-news/dist/css/main.css" rel="stylesheet"></head>
+    <body>
+        <div id="app" class="app"></div>
+    <script type="text/javascript" src="/react-news/dist/bundle.js"></script></body>
+</html>

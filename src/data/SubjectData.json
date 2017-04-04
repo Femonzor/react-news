@@ -1,0 +1,7 @@
+{
+    "subjects": [
+        { "name": "首页", "type": 0, "id": 1, "loaded": true }
+    ],
+    "selectId": 1,
+    "curIdx": 0
+}

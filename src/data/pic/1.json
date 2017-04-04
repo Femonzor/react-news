@@ -1,0 +1,10 @@
+{
+    "title": "这是第一篇图片类新闻",
+    "imgs": [
+        { "name": "3月27日下午，在得知朴槿惠被检方提请拘捕的消息后，愤怒的朴槿惠支持者冒着小雨自发聚集到首尔中央地方检察厅前进行抗议。", "src": "http://femonzor.github.io/resource/react-news/1.jpg" },
+        { "name": "有人扬言要冲击监察厅。上图红色标语写的是“宣布戒严令”吧，左边标语写的是“骗子弹劾，宣布戒严吧”，以暗示朴槿惠支持者将发动暴力抵抗。", "src": "http://femonzor.github.io/resource/react-news/2.jpg" },
+        { "name": "在朴槿惠位于江南区三成洞的私邸前，已在此坚守多日的“朴槿惠守护敢死队”成员在得知检方提请拘捕令的消息后开始高呼：“驳回弹劾”，“誓死守护”。", "src": "http://femonzor.github.io/resource/react-news/3.jpg" },
+        { "name": "鉴于朴槿惠支持者曾在3月10日掀起殴打记者、切腹自残等暴力事件并导致三人死亡的先例，当局紧急增加了私邸附近的警力布置，以防止愤怒的人群生事。", "src": "http://femonzor.github.io/resource/react-news/4.jpg" }
+    ],
+    "id": 1
+}

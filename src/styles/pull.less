@@ -1,0 +1,66 @@
+﻿.pull() {
+    background: #fff;
+    height: @refresh-height;
+    font-weight: bold;
+    text-align: center;
+    color: #888;
+}
+.pullicon() {
+    display: inline-block;
+    .square(@refresh-height / 2; @refresh-height / 2);
+    background: url(../images/pull-icon.png) 0 0 no-repeat;
+    background-size: @refresh-height / 2 @refresh-height;
+    vertical-align: middle;
+    transition: transform 250ms;
+}
+.pulldown {
+    .pull();
+    .pulldown-icon {
+        .pullicon();
+        transform: rotate(0deg) translateZ(0);
+    }
+    .pulldown-label {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &.flip {
+        .pulldown-icon {
+            transform: rotate(-180deg) translateZ(0);
+        }
+    }
+    &.loading {
+        .pulldown-icon {
+            transform: rotate(0deg) translateZ(0);
+            transition-duration: 0ms;
+            background: url(../images/loading.gif) no-repeat;
+            background-size: @refresh-height / 2 @refresh-height / 2;
+        }
+    }
+}
+.pullup {
+    .pull();
+    .pullup-icon {
+        .pullicon();
+        transform: rotate(-180deg) translateZ(0);
+    }
+    &.flip {
+        pullup-icon {
+            transform: rotate(0deg) translateZ(0);
+        }
+    }
+    &.loading {
+        .pullup-icon {
+            background-position: 0 100%;
+            transform: rotate(0deg) translateZ(0);
+            transition-duration: 0ms;
+            animation: loading 2s linear infinite;
+        }
+    }
+}
+@keyframes loading {
+    from { transform: rotate(0deg) translateZ(0); }
+    to { transform: rotate(360deg) translateZ(0); }
+}
+.haha {
+    color: red;
+}

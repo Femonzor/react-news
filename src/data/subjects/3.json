@@ -1,0 +1,10 @@
+{
+    "picInfos": [
+        { "src": "http://femonzor.github.io/resource/react-news/1.jpg", "title": "深圳航空正式入驻工行融e购电商平台", "time": "2017-01-12", "id": 1, "count": 2 },
+        { "src": "http://femonzor.github.io/resource/react-news/2.jpg", "title": "工行正式发布合规文化核心理念", "time": "2016-11-12", "id": 2, "count": 2 },
+        { "src": "http://femonzor.github.io/resource/react-news/3.jpg", "title": "工商银行定向招聘千名贫困大学生", "time": "2016-10-12", "id": 3, "count": 3 },
+        { "src": "http://femonzor.github.io/resource/react-news/4.jpg", "title": "工行获评年度银行科技发展特等奖", "time": "2016-08-08", "id": 4, "count": 2 },
+        { "src": "http://femonzor.github.io/resource/react-news/5.jpg", "title": "工行与新疆兵团开展“走出去”战略合作", "time": "2016-07-12", "id": 5, "count": 4 },
+        { "src": "http://femonzor.github.io/resource/react-news/6.jpg", "title": "工行获评中国最佳企业网上银行", "time": "2016-05-10", "id": 6, "count": 2 }
+    ]
+}

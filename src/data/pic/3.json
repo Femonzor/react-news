@@ -1,0 +1,12 @@
+{
+    "title": "这是第二篇图片类新闻",
+    "imgs": [
+        { "name": "近日，敦煌历史上最大的湖泊哈拉诺尔湖干涸60年后重现碧波。图为漫水面积达24平方千米的哈拉诺尔湖。", "src": "http://femonzor.github.io/resource/react-news/1.jpg" },
+        { "name": "阳春三月，素有中国“旱极”之称的甘肃敦煌境内一片干涸了半个多世纪的盐碱荒滩上出现了天水相连、碧波荡漾的大型湖泊，远望宛如“大海”。对于这座常年与黄沙相伴的戈壁城市而言，这一罕见景象连日来吸引不少民众去戈壁“看海”。", "src": "http://femonzor.github.io/resource/react-news/2.jpg" },
+        { "name": "干涸了半个多世纪的哈拉诺尔湖出现了天水相连、碧波荡漾的水面，远望宛如“大海”。", "src": "http://femonzor.github.io/resource/react-news/3.jpg" },
+        { "name": "距离敦煌市西北30多公里的哈拉诺尔湖，蒙语意为黑色的湖或黑海子，是疏勒河和党河的终端湖，历史上溢满后向西汇入库姆塔格沙漠东缘的哈拉齐和新疆罗布泊，具有阻挡沙漠东移、维护区域生物多样性和保障甘肃西部生态安全的巨大功能。", "src": "http://femonzor.github.io/resource/react-news/4.jpg" },
+        { "name": "但它从清朝雍正年间开始断流和萎缩，干涸于上世纪六、七十年代疏勒河昌马大坝、双塔水库和敦煌党河水库建成之时，并长期处于沙化状态，民众能看到的只是一个盐碱荒滩和“沙湖”。", "src": "http://femonzor.github.io/resource/react-news/5.jpg" },
+        { "name": "早年哈拉诺尔湖干涸景象。", "src": "http://femonzor.github.io/resource/react-news/6.jpg" }
+    ],
+    "id": 3
+}

@@ -1,0 +1,102 @@
+﻿.app {
+    .site-wrap();
+    .layout {
+        .site-wrap();
+        position: relative;
+    }
+    .main {
+        padding-top: @main-title-height;
+        height: 100%;
+        box-sizing: border-box;
+    }
+}
+.content {
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: @main-header-height;
+}
+.att-info {
+    color: #a2a2a2;
+}
+.main-wrap {
+    padding-top: @main-nav-height;
+    height: 100%;
+    box-sizing: border-box;
+    .main-scrl {
+        height: 100%;
+    }
+}
+.page {
+    height: 100%;
+    float: left;
+    .page-wrap {
+        max-height: 100%;
+        .page-scrl {
+            position: relative;
+        }
+    }
+}
+.bottom {
+    padding: .3rem 0;
+    color: #a2a2a2;
+    .bottom-loading, .bottom-end {
+        .square(70%; 1.1rem);
+        line-height: 1.1rem;
+        text-align: center;
+        border: 1px solid #f5f5f5;
+        border-radius: .2rem;
+        margin: 0 auto;
+        .loading-icon {
+            display: inline-block;
+            .square(.4rem; .4rem);
+            background: url(../images/loading.gif) no-repeat;
+            background-size: .4rem .4rem;
+            vertical-align: middle;
+            margin-right: .2rem;
+        }
+        .loading-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+.art {
+    overflow-y: scroll;
+    padding: .5rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+.loading-page {
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: @main-title-height;
+    .loading-icon {
+        display: inline-block;
+        .square(.5rem; .5rem);
+        background: url(../images/loading.gif) no-repeat;
+        background-size: .5rem .5rem;
+        vertical-align: middle;
+        margin-right: .2rem;
+    }
+    .loading-bg {
+        display: inline-block;
+        .square(2rem; .8rem);
+        background: url(../images/news_bg.png) no-repeat;
+        background-size: auto .8rem;
+        vertical-align: middle;
+    }
+}
+@keyframes infoshow {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, .5rem, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+.animate-infoshow {
+    animation: infoshow 400ms forwards ease-out;
+}

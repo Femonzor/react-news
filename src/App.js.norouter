@@ -1,0 +1,21 @@
+﻿import "./js/requestAnimationFrame";
+import React, { Component, PropTypes } from "react";
+import ReactDOM, { render } from "react-dom";
+import { Provider } from "react-redux";
+import router from "./routers/AppRouter";
+import store from "./stores/AppStore";
+import SiteLayout from "./components/SiteLayout";
+import SiteMainContainer from "./containers/SiteMainContainer";
+
+import "./styles/style.less";
+import initReactFastclick from "react-fastclick";
+initReactFastclick();
+
+render(
+    <Provider store={store}>
+        <SiteLayout>
+            <SiteMainContainer />
+        </SiteLayout>
+    </Provider>,
+    document.getElementById("app")
+);

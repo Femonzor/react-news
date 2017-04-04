@@ -1,0 +1,22 @@
+﻿.square(@width: auto; @height: auto) when (isnumber(@width)) {
+    width: @width;
+}
+.square(@width: auto; @height: auto) when (isnumber(@height)) {
+    height: @height;
+}
+.position(@top: auto; @right: auto; @bottom: auto; @left: auto) when (isnumber(@top)) {
+    top: @top;
+}
+.position(@top: auto; @right: auto; @bottom: auto; @left: auto) when (isnumber(@right)) {
+    right: @right;
+}
+.position(@top: auto; @right: auto; @bottom: auto; @left: auto) when (isnumber(@bottom)) {
+    bottom: @bottom;
+}
+.position(@top: auto; @right: auto; @bottom: auto; @left: auto) when (isnumber(@left)) {
+    left: @left;
+}
+.site-wrap() {
+    height: 100%;
+    overflow: hidden;
+}
