@@ -7,16 +7,20 @@ const propTypes = {
 };
 
 class DetailHeader extends Component {
-    constructor(props) {
-        super(props);
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    };
+    constructor(props, context) {
+        super(props, context);
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
         const { dispatch } = this.props;
-        dispatch(DetailActions.hideDetail());
-        setTimeout(() => {
-            dispatch(DetailActions.resetDetail());
-        }, 400);
+        this.context.router.goBack();
+        // dispatch(DetailActions.hideDetail());
+        // setTimeout(() => {
+        //     dispatch(DetailActions.resetDetail());
+        // }, 400);
     }
     handleTouchMove(e) {
         e.preventDefault();

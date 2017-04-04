@@ -1,5 +1,4 @@
 ﻿import React, {Component, PropTypes} from "react";
-import { Link } from "react-router";
 
 class MainTitle extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -18,9 +17,9 @@ class SiteHeader extends Component {
     }
     render() {
         return (
-            <Link to="/detail" id="header" className="header">
+            <div id="header" className="header">
                 <MainTitle />
-            </Link>
+            </div>
         );
     }
 }

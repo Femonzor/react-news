@@ -8,20 +8,10 @@ import DetailContainer from "../containers/DetailContainer";
 //const history = process.env.NODE_ENV !== "production" ? browserHistory : hashHistory;
 const history = hashHistory;
 
-class Temp extends Component {
-    render() {
-        return <div></div>;
-    }
-}
-
-history.listen((evt) => {
-    console.log("LISTENER: ", evt);
-});
-
 const RouteConfig = (
     <Router history={history}>
         <Route path="/" component={SiteLayout} />
-        <Route path="/detail" component={Temp} />
+        <Route path="/detail" component={DetailContainer} />
     </Router>
 );
 
