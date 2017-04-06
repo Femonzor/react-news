@@ -32,6 +32,7 @@ class ScrollContent extends Component {
             dispatch(SubjectsActions.switchSubjectByIdx(curIdx));
             IScrolls.setCurIdx(curIdx);
         }
+        IScrolls.switchCurrent(true);
     }
     renderPages() {
         const { subjects } = this.props;

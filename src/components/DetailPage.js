@@ -121,13 +121,26 @@ class DetailPage extends Component {
                <Loading />;
     }
     componentWillReceiveProps(nextProps) {
-        const { dispatch } = nextProps;
-        let el = null;
-        if (!this.props.show && nextProps.show && !nextProps.data) {
-            el = nextProps.dataId.split("-");
+        // const { dispatch } = nextProps;
+        // let el = null;
+        // if (!this.props.show && nextProps.show && !nextProps.data) {
+        //     el = nextProps.dataId.split("-");
+        //     setTimeout(() => {
+        //         el[0] === "info" ? dispatch(DetailActions.fetchInfoDetail(el[1])) : dispatch(DetailActions.fetchPicDetail(el[1]));
+        //     }, 500);
+        // }
+    }
+    componentDidMount() {
+        const { dispatch, data, location } = this.props;
+        const { id, type } = location.query;
+        if (!data) {
             setTimeout(() => {
-                el[0] === "info" ? dispatch(DetailActions.fetchInfoDetail(el[1])) : dispatch(DetailActions.fetchPicDetail(el[1]));
-            }, 500);
+                if (type === "info") {
+                    dispatch(DetailActions.fetchInfoDetail(id));
+                } else if (type === "pic") {
+                    dispatch(DetailActions.fetchPicDetail(id));
+                }
+            }, 1000);
         }
     }
     render() {

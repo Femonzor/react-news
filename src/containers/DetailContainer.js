@@ -4,14 +4,15 @@ import DetailPage from "../components/DetailPage";
 
 class DetailContainer extends Component {
     render() {
-        const { dataId, show, subjectName, items, dispatch } = this.props;
+        const { dataId, show, subjectName, items, dispatch, location } = this.props;
         const data = dataId ? items[dataId] : null;
         return <DetailPage
                    show={show}
                    subjectName={subjectName}
                    data={data}
                    dataId={dataId}
-                   dispatch={dispatch} />;
+                   dispatch={dispatch}
+                   location={location} />;
     }
 }
 

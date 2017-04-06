@@ -13,7 +13,7 @@ module.exports = {
     entry: SRC_PATH + "/App.js",
     output: {
         path: DIST_PATH,
-        filename: "bundle.js",
+        filename: "js/bundle.js",
         publicPath: SITE_DIR + "/dist/"
     },
     module: {
@@ -42,7 +42,7 @@ module.exports = {
             }
         }),
         new HtmlPlugin({
-            filename: "../index.html",
+            filename: "index.html",
             template: SRC_PATH + "/templates/index.html",
             hash: false,
         }),

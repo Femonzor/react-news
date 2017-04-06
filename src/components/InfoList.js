@@ -19,7 +19,7 @@ class InfoList extends Component {
         id = id % 5;
         if (id === 0) id = 5;
         dispatch(DetailActions.showDetail(subjectName, "info-" + id));
-        this.context.router.push("/detail");
+        this.context.router.push(`/detail?id=${id}&type=info`);
     }
     renderInfoItems() {
         const { infos } = this.props;

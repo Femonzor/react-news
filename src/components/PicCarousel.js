@@ -58,14 +58,14 @@ class PicCarousel extends Component {
         }
     }
     handleClick(e) {
-        // const { dispatch } = this.props;
-        // let id = +e.currentTarget.dataset.picinfoId;
-        // let subjectName = e.currentTarget.dataset.subjectName;
-        // subjectName = subjectName || this.props.subjectName;
-        // id = id % 3;
-        // if (id === 0) id = 3;
-        // dispatch(DetailActions.showDetail(subjectName, "pic-" + id));
-        this.context.router.push("/detail");
+        const { dispatch } = this.props;
+        let id = +e.currentTarget.dataset.picinfoId;
+        let subjectName = e.currentTarget.dataset.subjectName;
+        subjectName = subjectName || this.props.subjectName;
+        id = id % 3;
+        if (id === 0) id = 3;
+        dispatch(DetailActions.showDetail(subjectName, "pic-" + id));
+        this.context.router.push(`/detail?id=${id}&type=pic`);
     }
     handleTouchStart() {
         IScrolls.switchMain(false);

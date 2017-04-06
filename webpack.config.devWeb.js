@@ -2,7 +2,10 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlPlugin = require("html-webpack-plugin");
 
-var SRC_PATH = __dirname + "/src";
+var ROOT_PATH = __dirname;
+var SRC_PATH = ROOT_PATH + "/src";
+var DIST_PATH = ROOT_PATH + "/dist";
+var SITE_DIR = "/react-news";
 
 module.exports = {
     devtool: "source-map",
@@ -12,9 +15,9 @@ module.exports = {
         SRC_PATH + "/App.js"
     ],
     output: {
-        filename: "bundle.js",
-        publicPath: "http://localhost:9990/portal/dist/",
-        path: "./portal/dist"
+        filename: "js/bundle.js",
+        publicPath: "http://localhost:9990" + SITE_DIR + "/dist/",
+        path: SITE_DIR + "/dist"
     },
     module: {
         loaders: [{
@@ -49,7 +52,7 @@ module.exports = {
             }
         }),
         new HtmlPlugin({
-            filename: "../index.html",
+            filename: "index.html",
             template: SRC_PATH + "/templates/index.html",
             hash: false,
         }),

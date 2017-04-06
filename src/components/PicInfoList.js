@@ -7,8 +7,11 @@ const propTypes = {
 };
 
 class PicInfoList extends Component {
-    constructor(props) {
-        super(props);
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    };
+    constructor(props, context) {
+        super(props, context);
         this.handleItemClick = this.handleItemClick.bind(this);
     }
     handleItemClick(e) {
@@ -19,6 +22,7 @@ class PicInfoList extends Component {
         id = id % 3;
         if (id === 0) id = 3;
         dispatch(DetailActions.showDetail(subjectName, "pic-" + id));
+        this.context.router.push(`/detail?id=${id}&type=pic`);
     }
     renderPicInfoItems() {
         const { picInfos } = this.props;
