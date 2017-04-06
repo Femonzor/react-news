@@ -16,10 +16,6 @@ var IScrolls = {
     },
     setPage: function (iscroll, idx) {
         this.pages[idx] = iscroll;
-        this.prevIdx = this.curIdx;
-        this.curIdx = idx;
-        this.pages[this.prevIdx].disable();
-        this.pages[this.curIdx].enable();
     },
     switchMain: function (enable) {
         var iscroll = this.main;
@@ -64,6 +60,7 @@ var IScrolls = {
         }
     },
     scrollEndHandler: function () {
+        this.switchCurrent(true);
         this.switchMain(true);
     }
 };

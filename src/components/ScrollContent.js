@@ -23,8 +23,9 @@ class ScrollContent extends Component {
         const { dispatch } = this.props;
         const iscroll = this.refs.scroll.iscroll;
         const curIdx = iscroll.currentPage.pageX;
-        let subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
+        let subject = null;
         if (curIdx !== this.props.curIdx) {
+            subject = JSON.parse(sessionStorage.getItem("CURRENT_SUBJECT")) || {};
             subject.curIdx = curIdx;
             subject.name = this.props.subjects[curIdx].name;
             subject.id = this.props.subjects[curIdx].id;
